@@ -59,6 +59,12 @@ struct IntroView: View {
                 Spacer()
             }
         }
+        .background {
+            Image("introImage")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .ignoresSafeArea()
+        }
     }
 }
 

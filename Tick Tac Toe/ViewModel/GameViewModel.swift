@@ -19,6 +19,8 @@ final class GameViewModel: ObservableObject {
     @Published var alertItem: AlertItem?
     @Published var difficulty = Difficulty.medium
     @Published var secondPlayer: Player?
+    @Published var playerOneScore = 0
+    @Published var playerTwoScore = 0
     
     func processPlayerMove(for position: Int, player: Player? = .playerOne) {
         if isSquareOccupied(in: moves, forIndex: position) { return }
@@ -26,7 +28,13 @@ final class GameViewModel: ObservableObject {
         moves[position] = Move(player: player!, boardIndex: position)
         
         if checkWinCondition(for: player!, in: moves) {
-            alertItem = AlertContext.humanWin
+            if player == .playerOne{
+                alertItem = AlertContext.humanWin
+                playerOneScore += 1
+            } else {
+                alertItem = AlertContext.humanWin
+                playerTwoScore += 1
+            }
             isGameBoardDisabled = false
             return
         }
@@ -45,6 +53,7 @@ final class GameViewModel: ObservableObject {
                 
                 if checkWinCondition(for: .computer, in: moves) {
                     alertItem = AlertContext.computerWin
+                    playerTwoScore += 1
                     isGameBoardDisabled = false
                     return
                 }
@@ -135,4 +144,23 @@ final class GameViewModel: ObservableObject {
         }
     }
     
+    func resetScore() {
+        playerOneScore = 0
+        playerTwoScore = 0
+    }
+    
+    func getThemeColor() -> Color {
+        if secondPlayer == .computer {
+            return .red
+        } else {
+            return .cyan
+        }
+    }
+    func getBackground() -> String {
+        if secondPlayer == .computer {
+            return "robotBg"
+        } else {
+            return "playerBg"
+        }
+    }
 }

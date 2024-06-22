@@ -24,6 +24,7 @@ struct CustomButton: View {
         .foregroundStyle(.white)
         .background(color).opacity(0.8)
         .clipShape(.rect(cornerRadius: 10.0))
+        .border(.white, width: 2)
         .font(.title3)
         .fontWeight(.bold)
         .padding()

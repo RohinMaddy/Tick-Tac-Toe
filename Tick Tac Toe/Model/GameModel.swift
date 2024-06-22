@@ -5,7 +5,7 @@
 //  Created by Rohin Madhavan on 21/06/2024.
 //
 
-import Foundation
+import SwiftUI
 
 enum Player {
     case playerOne, playerTwo, computer

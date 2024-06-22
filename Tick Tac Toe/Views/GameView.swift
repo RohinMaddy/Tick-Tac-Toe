@@ -17,17 +17,21 @@ struct GameView: View {
         GeometryReader { geometry in
             VStack(alignment: .trailing) {
                 Button("", systemImage: "house.fill") {
+                    viewModel.resetGame()
+                    viewModel.resetScore()
                     showIntro = true
                 }
                 .frame(width: 40, height: 40)
                 .font(.title)
-                .foregroundStyle(.cyan)
+                .foregroundStyle(.white)
                 
                 Spacer()
                 LazyVGrid (columns: viewModel.columns, spacing: 5) {
                     ForEach(0..<9) { i in
                         ZStack {
-                            GameSquareView(proxy: geometry)
+                            
+                            GameSquareView(proxy: geometry, color: viewModel.getThemeColor())
+                            
                             PlayerIndicator(systemImageName: viewModel.moves[i]?.indicator ?? "")
                         }
                         .onTapGesture {
@@ -42,6 +46,10 @@ struct GameView: View {
                     }
                 }
                 Spacer()
+                FooterView(viewModel: viewModel, footerColor: viewModel.getThemeColor())
+                    .border(.white, width: 2)
+                
+                
             }
             .disabled(viewModel.isGameBoardDisabled)
             .padding()
@@ -50,8 +58,15 @@ struct GameView: View {
                       message: item.message,
                       dismissButton: .default(item.buttonTitle, action: {
                     viewModel.resetGame()
+                    player = Player.playerOne
                 }))
             }
+        }
+        .background {
+            Image(viewModel.getBackground())
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .ignoresSafeArea()
         }
         .fullScreenCover(isPresented: $showIntro, content: {
             ZStack {

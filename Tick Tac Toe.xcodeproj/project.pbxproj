@@ -18,6 +18,7 @@
 		9B3D59252C257F9900ADE6EF /* PlayerIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3D59242C257F9900ADE6EF /* PlayerIndicator.swift */; };
 		9B3D592B2C2587C700ADE6EF /* IntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3D592A2C2587C700ADE6EF /* IntroView.swift */; };
 		9B3D592D2C272AB500ADE6EF /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3D592C2C272AB500ADE6EF /* CustomButton.swift */; };
+		9B3D59302C275D3500ADE6EF /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3D592F2C275D3500ADE6EF /* FooterView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		9B3D59242C257F9900ADE6EF /* PlayerIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerIndicator.swift; sourceTree = "<group>"; };
 		9B3D592A2C2587C700ADE6EF /* IntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroView.swift; sourceTree = "<group>"; };
 		9B3D592C2C272AB500ADE6EF /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		9B3D592F2C275D3500ADE6EF /* FooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +126,7 @@
 				9B3D59222C257F5000ADE6EF /* GameSquareView.swift */,
 				9B3D592C2C272AB500ADE6EF /* CustomButton.swift */,
 				9B3D59242C257F9900ADE6EF /* PlayerIndicator.swift */,
+				9B3D592F2C275D3500ADE6EF /* FooterView.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -201,6 +204,7 @@
 				9B3D59212C257F0600ADE6EF /* GameModel.swift in Sources */,
 				9B3D592B2C2587C700ADE6EF /* IntroView.swift in Sources */,
 				9B3D592D2C272AB500ADE6EF /* CustomButton.swift in Sources */,
+				9B3D59302C275D3500ADE6EF /* FooterView.swift in Sources */,
 				9B3D591F2C24C30F00ADE6EF /* GameViewModel.swift in Sources */,
 				9B3D59112C244FE900ADE6EF /* GameView.swift in Sources */,
 				9B3D59232C257F5000ADE6EF /* GameSquareView.swift in Sources */,
