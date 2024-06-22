@@ -8,17 +8,29 @@
 
 /* Begin PBXBuildFile section */
 		9B3D590F2C244FE900ADE6EF /* Tick_Tac_ToeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3D590E2C244FE900ADE6EF /* Tick_Tac_ToeApp.swift */; };
-		9B3D59112C244FE900ADE6EF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3D59102C244FE900ADE6EF /* ContentView.swift */; };
+		9B3D59112C244FE900ADE6EF /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3D59102C244FE900ADE6EF /* GameView.swift */; };
 		9B3D59132C244FEA00ADE6EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B3D59122C244FEA00ADE6EF /* Assets.xcassets */; };
 		9B3D59162C244FEA00ADE6EF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B3D59152C244FEA00ADE6EF /* Preview Assets.xcassets */; };
+		9B3D591D2C24AEC600ADE6EF /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3D591C2C24AEC600ADE6EF /* Alerts.swift */; };
+		9B3D591F2C24C30F00ADE6EF /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3D591E2C24C30F00ADE6EF /* GameViewModel.swift */; };
+		9B3D59212C257F0600ADE6EF /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3D59202C257F0600ADE6EF /* GameModel.swift */; };
+		9B3D59232C257F5000ADE6EF /* GameSquareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3D59222C257F5000ADE6EF /* GameSquareView.swift */; };
+		9B3D59252C257F9900ADE6EF /* PlayerIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3D59242C257F9900ADE6EF /* PlayerIndicator.swift */; };
+		9B3D592B2C2587C700ADE6EF /* IntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3D592A2C2587C700ADE6EF /* IntroView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		9B3D590B2C244FE900ADE6EF /* Tick Tac Toe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tick Tac Toe.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B3D590E2C244FE900ADE6EF /* Tick_Tac_ToeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tick_Tac_ToeApp.swift; sourceTree = "<group>"; };
-		9B3D59102C244FE900ADE6EF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		9B3D59102C244FE900ADE6EF /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		9B3D59122C244FEA00ADE6EF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9B3D59152C244FEA00ADE6EF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		9B3D591C2C24AEC600ADE6EF /* Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
+		9B3D591E2C24C30F00ADE6EF /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
+		9B3D59202C257F0600ADE6EF /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
+		9B3D59222C257F5000ADE6EF /* GameSquareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSquareView.swift; sourceTree = "<group>"; };
+		9B3D59242C257F9900ADE6EF /* PlayerIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerIndicator.swift; sourceTree = "<group>"; };
+		9B3D592A2C2587C700ADE6EF /* IntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,8 +63,10 @@
 		9B3D590D2C244FE900ADE6EF /* Tick Tac Toe */ = {
 			isa = PBXGroup;
 			children = (
-				9B3D590E2C244FE900ADE6EF /* Tick_Tac_ToeApp.swift */,
-				9B3D59102C244FE900ADE6EF /* ContentView.swift */,
+				9B3D59262C257FB900ADE6EF /* App */,
+				9B3D59292C257FCE00ADE6EF /* Model */,
+				9B3D59272C257FC100ADE6EF /* Views */,
+				9B3D59282C257FC700ADE6EF /* ViewModel */,
 				9B3D59122C244FEA00ADE6EF /* Assets.xcassets */,
 				9B3D59142C244FEA00ADE6EF /* Preview Content */,
 			);
@@ -65,6 +79,42 @@
 				9B3D59152C244FEA00ADE6EF /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		9B3D59262C257FB900ADE6EF /* App */ = {
+			isa = PBXGroup;
+			children = (
+				9B3D590E2C244FE900ADE6EF /* Tick_Tac_ToeApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		9B3D59272C257FC100ADE6EF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9B3D59102C244FE900ADE6EF /* GameView.swift */,
+				9B3D59222C257F5000ADE6EF /* GameSquareView.swift */,
+				9B3D59242C257F9900ADE6EF /* PlayerIndicator.swift */,
+				9B3D592A2C2587C700ADE6EF /* IntroView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9B3D59282C257FC700ADE6EF /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				9B3D591E2C24C30F00ADE6EF /* GameViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		9B3D59292C257FCE00ADE6EF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9B3D591C2C24AEC600ADE6EF /* Alerts.swift */,
+				9B3D59202C257F0600ADE6EF /* GameModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,7 +187,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B3D59112C244FE900ADE6EF /* ContentView.swift in Sources */,
+				9B3D59212C257F0600ADE6EF /* GameModel.swift in Sources */,
+				9B3D592B2C2587C700ADE6EF /* IntroView.swift in Sources */,
+				9B3D591F2C24C30F00ADE6EF /* GameViewModel.swift in Sources */,
+				9B3D59112C244FE900ADE6EF /* GameView.swift in Sources */,
+				9B3D59232C257F5000ADE6EF /* GameSquareView.swift in Sources */,
+				9B3D59252C257F9900ADE6EF /* PlayerIndicator.swift in Sources */,
+				9B3D591D2C24AEC600ADE6EF /* Alerts.swift in Sources */,
 				9B3D590F2C244FE900ADE6EF /* Tick_Tac_ToeApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
