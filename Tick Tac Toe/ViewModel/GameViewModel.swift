@@ -8,47 +8,55 @@
 import SwiftUI
 
 final class GameViewModel: ObservableObject {
+    
     let columns: [GridItem] = [GridItem(.flexible()),
                                GridItem(.flexible()),
                                GridItem(.flexible())]
+    private let winPatterns: Set<Set<Int>> = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
     
     @Published var moves: [Move?] = Array.init(repeating: nil, count: 9)
     @Published var isGameBoardDisabled = false
     @Published var alertItem: AlertItem?
     @Published var difficulty = Difficulty.medium
+    @Published var secondPlayer: Player?
     
-    func processPlayerMove(for position: Int) {
+    func processPlayerMove(for position: Int, player: Player? = .playerOne) {
         if isSquareOccupied(in: moves, forIndex: position) { return }
         
-        moves[position] = Move(player: .human, boardIndex: position)
+        moves[position] = Move(player: player!, boardIndex: position)
         
-        if checkWinCondition(for: .human, in: moves) {
+        if checkWinCondition(for: player!, in: moves) {
             alertItem = AlertContext.humanWin
+            isGameBoardDisabled = false
             return
         }
         
         if checkForDraw(in: moves) {
             alertItem = AlertContext.draw
+            isGameBoardDisabled = false
             return
         }
         
-        isGameBoardDisabled = true
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [self] in
-            let computerPosition = determineComputerMovePosition(in: moves)
-            moves[computerPosition] = Move(player: .computer, boardIndex: computerPosition)
-            
-            if checkWinCondition(for: .computer, in: moves) {
-                alertItem = AlertContext.computerWin
-                return
+        if secondPlayer == .computer {
+            isGameBoardDisabled = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [self] in
+                let computerPosition = determineComputerMovePosition(in: moves)
+                moves[computerPosition] = Move(player: .computer, boardIndex: computerPosition)
+                
+                if checkWinCondition(for: .computer, in: moves) {
+                    alertItem = AlertContext.computerWin
+                    isGameBoardDisabled = false
+                    return
+                }
+                
+                if checkForDraw(in: moves) {
+                    alertItem = AlertContext.draw
+                    isGameBoardDisabled = false
+                    return
+                }
+                
+                isGameBoardDisabled = false
             }
-            
-            if checkForDraw(in: moves) {
-                alertItem = AlertContext.draw
-                return
-            }
-            
-            isGameBoardDisabled = false
         }
     }
     
@@ -56,35 +64,37 @@ final class GameViewModel: ObservableObject {
         return moves.contains(where: { $0?.boardIndex == index })
     }
     
+    func determineMove(in moves: [Move?], for player: Player) -> Int? {
+        let playerMoves = moves.compactMap{ $0 }.filter { $0.player == player }
+        let playerPositions = Set(playerMoves.map{ $0.boardIndex })
+        
+        for pattern in winPatterns {
+            let winPositions = pattern.subtracting(playerPositions)
+            
+            if winPositions.count == 1 {
+                let isAvailable = !isSquareOccupied(in: moves, forIndex: winPositions.first!)
+                if isAvailable { return winPositions.first! }
+            }
+        }
+        return nil
+    }
+    
     func determineComputerMovePosition(in moves: [Move?]) -> Int {
-        let winPatterns: Set<Set<Int>> = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
-        
+       
         // Win if possible
-        let computerMoves = moves.compactMap{ $0 }.filter { $0.player == .computer }
-        let computerPositions = Set(computerMoves.map{ $0.boardIndex })
-        
-        for pattern in winPatterns {
-            let winPositions = pattern.subtracting(computerPositions)
-            
-            if winPositions.count == 1 {
-                let isAvailable = !isSquareOccupied(in: moves, forIndex: winPositions.first!)
-                if isAvailable { return winPositions.first! }
+        if difficulty == .medium || difficulty == .hard {
+            if let position = determineMove(in: moves, for: .computer) {
+                return position
             }
         }
-        
+
         // Block if possible
-        let humanMoves = moves.compactMap{ $0 }.filter { $0.player == .human }
-        let humanPositions = Set(humanMoves.map{ $0.boardIndex })
-        
-        for pattern in winPatterns {
-            let winPositions = pattern.subtracting(humanPositions)
-            
-            if winPositions.count == 1 {
-                let isAvailable = !isSquareOccupied(in: moves, forIndex: winPositions.first!)
-                if isAvailable { return winPositions.first! }
+        if difficulty == .hard {
+            if let position = determineMove(in: moves, for: .playerOne) {
+                return position
             }
         }
-        
+    
         // Middle square
         let centerSquare  = 4
         if !isSquareOccupied(in: moves, forIndex: centerSquare) {
@@ -101,7 +111,6 @@ final class GameViewModel: ObservableObject {
     }
     
     func checkWinCondition(for player: Player, in moves: [Move?]) -> Bool {
-        let winPatterns: Set<Set<Int>> = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
         let playerMoves = moves.compactMap{ $0 }.filter { $0.player == player }
         let playerPositions = Set(playerMoves.map{ $0.boardIndex })
         
@@ -116,6 +125,14 @@ final class GameViewModel: ObservableObject {
     
     func resetGame() {
         moves = Array.init(repeating: nil, count: 9)
+    }
+    
+    func togglePlayer(player: Player) -> Player {
+        if player == .playerOne {
+            return Player.playerTwo
+        } else {
+            return Player.playerOne
+        }
     }
     
 }

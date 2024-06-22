@@ -8,7 +8,7 @@
 import Foundation
 
 enum Player {
-    case human, computer
+    case playerOne, playerTwo, computer
 }
 
 enum Difficulty {
@@ -20,6 +20,6 @@ struct Move {
     let boardIndex: Int
     
     var indicator: String {
-        return player == .human ? "xmark" : "circle"
+        return player == .playerOne ? "xmark" : "circle"
     }
 }

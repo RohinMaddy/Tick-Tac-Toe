@@ -11,14 +11,17 @@ struct IntroView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var didSelectComputer = false
     @State private var settingsDetent = PresentationDetent.medium
-    @ObservedObject var viewModel = GameViewModel()
+    @ObservedObject var viewModel: GameViewModel
     
     var body: some View {
         GeometryReader { geometry in
             VStack {
                 Spacer()
                 
-                CustomButton(proxy: geometry, color: .cyan, title: "VS Player", height: 80) { dismiss() }
+                CustomButton(proxy: geometry, color: .cyan, title: "VS Player", height: 80) {
+                    viewModel.secondPlayer = .playerTwo
+                    dismiss()
+                }
                 
                 CustomButton(proxy: geometry, color: .red, title: " VS Computer", height: 80) {
                     didSelectComputer.toggle()
@@ -31,14 +34,19 @@ struct IntroView: View {
                         
                         CustomButton(proxy: geometry, color: .green, title: "Easy", height: 60) {
                             viewModel.difficulty = .easy
+                            viewModel.secondPlayer = .computer
                             dismiss()
                         }
+                        
                         CustomButton(proxy: geometry, color: .yellow, title: "Medium", height: 60) {
                             viewModel.difficulty = .medium
+                            viewModel.secondPlayer = .computer
                             dismiss()
                         }
+                        
                         CustomButton(proxy: geometry, color: .red, title: "Hard", height: 60) {
-                            viewModel.difficulty = .medium
+                            viewModel.difficulty = .hard
+                            viewModel.secondPlayer = .computer
                             dismiss()
                         }
                     }
@@ -54,29 +62,6 @@ struct IntroView: View {
     }
 }
 
-#Preview {
-    IntroView()
-}
-
-struct CustomButton: View {
-    
-    var proxy: GeometryProxy
-    var color: Color
-    var title: String
-    var height: Double
-    var action: () -> Void
-   
-    
-    var body: some View {
-        Button(title) {
-            action()
-        }
-        .frame(width: proxy.size.width - 30, height: height)
-        .foregroundStyle(.white)
-        .background(color).opacity(0.8)
-        .clipShape(.rect(cornerRadius: 10.0))
-        .font(.title3)
-        .fontWeight(.bold)
-        .padding()
-    }
-}
+//#Preview {
+//    IntroView()
+//}
